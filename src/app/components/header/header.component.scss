@@ -13,11 +13,26 @@
     gap: 1.6rem;
     display: flex;
     align-items: center;
+
+    &:last-child {
+      img {
+        cursor: pointer;
+      }
+    }
   }
 
   .nested-subcontainer {
     gap: 0.8rem;
     display: flex;
     align-items: center;
+
+    > img {
+      cursor: pointer;
+    }
+  }
+
+  .add--disabled {
+    opacity: 0.25;
+    cursor: default;
   }
 }
