@@ -1,0 +1,16 @@
+<div class="container">
+  <h1 class="heading--l">{{data.task.title}}</h1>
+
+  <h3 class="text">{{data.task.description}}</h3>
+
+  <p class="text--bold">Subtasks ({{data.completedAmount}} of {{data.task.subtasks.length}})</p>
+
+  <div class="subtask">
+    @for(subtask of data.task.subtasks; track subtask.title) {
+    <app-subtask-modal [subtask]="subtask"></app-subtask-modal>
+    }
+  </div>
+
+  <app-select [label]="'Current Status'" [values]="dropdownValues" [selectedValue]="data.task.status"
+    (emitChangeSelectValue)="onChangeTaskStatus($event)"></app-select>
+</div>

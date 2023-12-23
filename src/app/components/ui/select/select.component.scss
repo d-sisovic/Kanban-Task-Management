@@ -1,0 +1,14 @@
+@use "../../../../styles/variables";
+
+.container {
+  width: 100%;
+
+  .text--bold {
+    margin-bottom: 0.8rem;
+    color: variables.$medium-grey;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}

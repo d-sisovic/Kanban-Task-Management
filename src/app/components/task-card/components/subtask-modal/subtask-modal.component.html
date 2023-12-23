@@ -1,0 +1,7 @@
+<div class="container">
+  <mat-checkbox color="primary" [checked]="subtask.isCompleted" #checkbox></mat-checkbox>
+
+  <span class="label text--bold" [ngClass]="{'label--completed': subtask.isCompleted}" (click)="onToggleCheckbox()">
+    {{subtask.title}}
+  </span>
+</div>

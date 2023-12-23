@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { IBoard } from '../../../ts/models/board.model';
 import { ContentStoreService } from '../content/services/content-store.service';
 import { ChangeDetectionStrategy, Component, OnInit, Signal, inject, signal } from '@angular/core';
@@ -5,7 +6,7 @@ import { ChangeDetectionStrategy, Component, OnInit, Signal, inject, signal } fr
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,0 +1,17 @@
+@use "../../../../../styles/variables";
+
+.container {
+  display: flex;
+  align-items: center;
+  border-radius: 0.4rem;
+  background: variables.$light-grey-light-bg;
+
+  .label {
+    padding: 1.3rem 0.8rem 1.6rem 0;
+  }
+
+  .label--completed {
+    opacity: 0.5;
+    text-decoration: line-through;
+  }
+}

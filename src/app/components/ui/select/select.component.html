@@ -1,0 +1,11 @@
+<div class="container">
+  <p class="text--bold">{{label}}</p>
+
+  <mat-form-field>
+    <mat-select [value]="selectedValue" (selectionChange)="onChangeValue($event)">
+      @for (item of values; track item.label) {
+      <mat-option [value]="item.value">{{item.label}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>

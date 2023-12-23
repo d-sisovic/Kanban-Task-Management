@@ -1,0 +1,24 @@
+@use "../../../../../styles/variables";
+
+.container {
+  gap: 2.4rem;
+  display: flex;
+  padding: 2.4rem;
+  flex-direction: column;
+
+  .text {
+    font-weight: 500;
+    color: variables.$medium-grey;
+  }
+
+  .text--bold {
+    color: variables.$medium-grey;
+  }
+
+  .subtask {
+    gap: 0.8rem;
+    display: flex;
+    margin-top: 1.6rem;
+    flex-direction: column;
+  }
+}

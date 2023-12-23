@@ -10,7 +10,8 @@
   </div>
 
   <div class="subcontainer">
-    <img src="assets/images/icon-plus-button.svg" alt="icon-plus-button">
+    <img src="assets/images/icon-plus-button.svg" alt="icon-plus-button"
+      [ngClass]="{'add--disabled': !selectedBoard()}">
 
     <img src="assets/images/icon-vertical-ellipsis.svg" alt="icon-vertical-ellipsis">
   </div>
