@@ -1,0 +1,7 @@
+@use "../styles/variables";
+
+.container {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: variables.$light-grey-light-bg;
+}

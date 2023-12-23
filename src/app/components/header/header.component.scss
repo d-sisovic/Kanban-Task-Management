@@ -1,0 +1,23 @@
+@use "../../../styles/variables";
+
+.container {
+  gap: 1.6rem;
+  display: flex;
+  padding: 1.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+  background: variables.$white;
+  justify-content: space-between;
+
+  .subcontainer {
+    gap: 1.6rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .nested-subcontainer {
+    gap: 0.8rem;
+    display: flex;
+    align-items: center;
+  }
+}

@@ -1,0 +1,9 @@
+.container {
+  padding: 2.4rem 1.6rem;
+
+  .column {
+    gap: 2.4rem;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+}

@@ -1,0 +1,15 @@
+<div class="container">
+  @if(selectedBoard(); as selectedBoard) {
+
+  <div class="column">
+    @for(column of selectedBoard.columns; track column.name; let index = $index) {
+    <app-column [column]="column" [index]="index"></app-column>
+    } @empty {
+    <app-empty-board></app-empty-board>
+    }
+  </div>
+
+  } @else {
+  <app-empty-board></app-empty-board>
+  }
+</div>

@@ -1,0 +1,7 @@
+<app-column-header [name]="column.name" [index]="index" [numberOfTasks]="column.tasks.length"></app-column-header>
+
+<div class="container">
+  @for(task of column.tasks; track task.title) {
+    <app-task-card [task]="task"></app-task-card>
+  }
+</div>

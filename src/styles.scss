@@ -3,3 +3,39 @@
 @use './styles/fonts';
 @use './styles/variables';
 @use './styles/breakpoints';
+
+.heading--xl {
+  font-size: 2.4rem;
+  line-height: 3rem;
+  font-family: "PlusJakartaSans-Bold";
+}
+
+.heading--l {
+  font-size: 1.8rem;
+  line-height: 2.3rem;
+  font-family: "PlusJakartaSans-Bold";
+}
+
+.heading--m {
+  font-size: 1.5rem;
+  line-height: 1.9rem;
+  font-family: "PlusJakartaSans-Bold";
+}
+
+.heading--s {
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  font-family: "PlusJakartaSans-Bold";
+}
+
+.text {
+  font-size: 1.3rem;
+  line-height: 2.3rem;
+  font-family: "PlusJakartaSans-Medium";
+}
+
+.text--bold {
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  font-family: "PlusJakartaSans-Bold";
+}
