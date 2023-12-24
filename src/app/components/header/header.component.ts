@@ -24,4 +24,8 @@ export class HeaderComponent implements OnInit {
   public ngOnInit(): void {
     this.selectedBoard = this.contentStoreService.getSelectedBoard;
   }
+
+  public onAddTask(): void {
+
+  }
 }

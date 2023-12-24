@@ -1,6 +1,7 @@
 @use "../../../../../styles/variables";
 
 .container {
+  width: 100%;
   gap: 1.2rem;
   align-items: center;
   display: inline-flex;
@@ -8,6 +9,13 @@
   letter-spacing: 2.4px;
   text-transform: uppercase;
   color: variables.$medium-grey;
+
+  .heading--s {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: calc(28rem - 2.7rem);
+  }
 
   .dot {
     width: 1.5rem;

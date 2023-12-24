@@ -1,6 +1,6 @@
-import { MatDialog } from '@angular/material/dialog';
 import { ITask } from '../../../ts/models/task.model';
-import { ChangeDetectionStrategy, Component, Input, OnInit, inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, inject } from '@angular/core';
 import { TaskCardModalComponent } from './components/task-card-modal/task-card-modal.component';
 
 @Component({
@@ -11,19 +11,20 @@ import { TaskCardModalComponent } from './components/task-card-modal/task-card-m
   styleUrl: './task-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TaskCardComponent implements OnInit {
+export class TaskCardComponent implements OnChanges {
 
   @Input() task!: ITask;
 
-  public completedAmount = 0;
-
   public dialog: MatDialog;
+  public completedAmount = 0;
 
   constructor() {
     this.dialog = inject(MatDialog);
   }
 
-  public ngOnInit(): void {
+  public ngOnChanges(): void {
+    if (!this.task) { return; }
+
     this.completedAmount = this.task.subtasks.filter(subtask => subtask.isCompleted).length;
   }
 
