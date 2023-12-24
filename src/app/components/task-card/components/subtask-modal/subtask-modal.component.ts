@@ -21,11 +21,7 @@ export class SubtaskModalComponent {
 
   @Input({ required: true }) subtask!: ISubtask;
 
-  private readonly contentStoreService: ContentStoreService;
-
-  constructor() {
-    this.contentStoreService = inject(ContentStoreService);
-  }
+  private readonly contentStoreService = inject(ContentStoreService);
 
   public onToggleCheckbox(): void {
     this.checkboxElement.toggle();

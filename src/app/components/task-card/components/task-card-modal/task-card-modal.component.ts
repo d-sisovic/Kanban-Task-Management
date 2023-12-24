@@ -21,14 +21,12 @@ import { ChangeDetectionStrategy, Component, Inject, OnInit, Signal, inject } fr
 })
 export class TaskCardModalComponent implements OnInit {
 
-  private readonly contentStoreService: ContentStoreService;
+  private readonly contentStoreService = inject(ContentStoreService);
 
   public dropdownValues: ILabelValue[] = [];
   public selectedTask!: Signal<ITask | null>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { task: ITask, completedAmount: number }) {
-    this.contentStoreService = inject(ContentStoreService);
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { task: ITask, completedAmount: number }) {}
 
   public ngOnInit(): void {
     this.dropdownValues = this.contentStoreService.getTaskStatus();

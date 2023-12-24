@@ -23,6 +23,7 @@
   </div>
 
   <app-select [label]="'Current Status'" [values]="dropdownValues" [selectedValue]="selectedTask.status"
-    (emitChangeSelectValue)="onChangeTaskStatus($event)"></app-select>
+    (emitChangeSelectValue)="onChangeTaskStatus($event)">
+  </app-select>
 </div>
 }

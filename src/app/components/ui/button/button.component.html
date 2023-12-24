@@ -1,1 +1,6 @@
-<button class="button heading--m">{{label}}</button>
+<button class="button heading--m" [ngClass]="{
+  'button--large': large,
+  'button--secondary': color === getButtonColor.SECONDARY
+  }" [disabled]="disabled" (click)="onClick()">
+  {{label}}
+</button>

@@ -1,0 +1,24 @@
+<form [formGroup]="taskForm" class="container">
+  <h1 class="heading--l">
+    @if(data.addMode) {
+    Add New Task
+    } @else {
+    Edit Task
+    }
+  </h1>
+
+  <app-input label="Title" placeholder="e.g. Take coffee break" controlName="title"></app-input>
+
+  <app-input label="Description" [textareaMode]="true" [isInputRequired]="false"
+    placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
+    controlName="description">
+  </app-input>
+
+  <app-task-modal-subtask [controlName]="'subtasks'"></app-task-modal-subtask>
+
+  <app-select [label]="'Status'" [values]="dropdownValues" [selectedValue]="selectedStatus"
+    (emitChangeSelectValue)="onChangeTaskStatus($event)">
+  </app-select>
+
+  <app-button [label]="buttonText" [disabled]="!taskForm.valid" (clickHandler)="onSubmitForm()"></app-button>
+</form>

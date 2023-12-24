@@ -2,8 +2,36 @@
 
 .button {
   border: none;
+  cursor: pointer;
   border-radius: 2.4rem;
   padding: 1.5rem 1.7rem;
   color: variables.$white;
   background: variables.$main-purple;
+
+  &:hover {
+    background: variables.$main-purple-hover;
+
+    .button--secondary {
+      background: rgba(variables.$main-purple, 0.25);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &--secondary {
+    color: variables.$main-purple;
+    background: rgba(variables.$main-purple, 0.10);
+  }
+
+  &--large {
+    width: 100%;
+    font-size: 1.3rem;
+    line-height: 2.3rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    font-family: "PlusJakartaSans-Bold";
+  }
 }

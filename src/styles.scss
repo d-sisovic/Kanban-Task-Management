@@ -35,6 +35,8 @@ $kanban-task-management-theme: mat.define-light-theme((color: (primary: $kanban-
 
 /* You can add global styles to this file, and also import other style files */
 
+// Angular Material override styles
+
 :root {
   --mdc-dialog-container-shape: 0.6rem;
   --mdc-filled-text-field-container-color: transparent;
@@ -58,7 +60,7 @@ mat-form-field {
   display: none !important;
 }
 
-.mat-mdc-select-min-line  {
+.mat-mdc-select-min-line {
   font-weight: 500;
   font-size: 1.3rem;
   color: variables.$black;
@@ -89,10 +91,17 @@ mat-form-field {
 
 .cdk-overlay-pane {
   width: 100%;
-  max-width: calc(100vw - 3.2rem) !important;
+  max-height: calc(100vh - 3.2rem);
 }
 
+// Custom classes
 
+.input__label {
+  @extend .text--bold;
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  color: variables.$medium-grey;
+}
 
 .heading--xl {
   font-size: 2.4rem;

@@ -1,0 +1,19 @@
+<div class="container">
+  <span class="input__label">{{label}}</span>
+
+  <mat-form-field [ngClass]="{'input--error': formControl.hasError('required')}">
+    @if(!textareaMode) {
+    <input matInput [placeholder]="placeholder" [formControlName]="controlName"
+      [ngClass]="{'input--shorten': formControl.hasError('required') && formControl.dirty}">
+
+    @if(formControl.hasError('required') && formControl.dirty) {
+    <span class="error text">Can't be empty</span>
+    }
+
+    } @else {
+    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" [formControlName]="controlName"
+      [placeholder]="placeholder">
+    </textarea>
+    }
+  </mat-form-field>
+</div>

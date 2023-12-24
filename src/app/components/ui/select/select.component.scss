@@ -1,12 +1,5 @@
-@use "../../../../styles/variables";
-
 .container {
   width: 100%;
-
-  .text--bold {
-    margin-bottom: 0.8rem;
-    color: variables.$medium-grey;
-  }
 
   .icon {
     top: 50%;

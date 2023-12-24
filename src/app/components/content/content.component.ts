@@ -20,15 +20,10 @@ import { ChangeDetectionStrategy, Component, OnInit, Signal, inject, signal } fr
 })
 export class ContentComponent implements OnInit {
 
-  private readonly activatedRoute;
-  private readonly contentStoreService: ContentStoreService;
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly contentStoreService = inject(ContentStoreService);
 
   public selectedBoard: Signal<IBoard | null> = signal(null);
-
-  constructor() {
-    this.activatedRoute = inject(ActivatedRoute);
-    this.contentStoreService = inject(ContentStoreService);
-  }
 
   public ngOnInit(): void {
     this.selectedBoard = this.contentStoreService.getSelectedBoard;
