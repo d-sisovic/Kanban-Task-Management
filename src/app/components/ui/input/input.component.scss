@@ -1,0 +1,38 @@
+@use "../../../../styles/variables";
+
+:host {
+  width: 100%;
+}
+
+.container {
+    position: relative;
+
+    input,
+    textarea {
+      font-weight: 500;
+      font-size: 1.3rem;
+      color: variables.$black;
+      font-family: "PlusJakartaSans-Regular";
+    }
+
+    textarea {
+      min-height: 11.2rem;
+    }
+
+    .input--error {
+      outline: 1px solid variables.$red;
+    }
+
+    .input--shorten {
+      padding-right: 11rem;
+    }
+
+    .error {
+      top: 50%;
+      right: 0;
+      position: absolute;
+      color: variables.$red;
+      transform: translateY(-50%);
+      background-color: variables.$white;
+    }
+}

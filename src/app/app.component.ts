@@ -18,11 +18,9 @@ import { ContentStoreService } from './components/content/services/content-store
 })
 export class AppComponent {
 
-  private readonly contentStoreService: ContentStoreService;
+  private readonly contentStoreService = inject(ContentStoreService);
 
   constructor() {
-    this.contentStoreService = inject(ContentStoreService);
-
     effect(() => {
       const boards = this.contentStoreService.getBoards();
 

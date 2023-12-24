@@ -15,12 +15,9 @@ export class TaskCardComponent implements OnChanges {
 
   @Input() task!: ITask;
 
-  public dialog: MatDialog;
-  public completedAmount = 0;
+  public readonly dialog = inject(MatDialog);
 
-  constructor() {
-    this.dialog = inject(MatDialog);
-  }
+  public completedAmount = 0;
 
   public ngOnChanges(): void {
     if (!this.task) { return; }

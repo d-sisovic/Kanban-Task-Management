@@ -1,7 +1,7 @@
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ILabelValue } from '../../../../ts/models/label-value.model';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-select',
@@ -11,7 +11,8 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
     MatFormFieldModule
   ],
   templateUrl: './select.component.html',
-  styleUrl: './select.component.scss'
+  styleUrl: './select.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectComponent {
 

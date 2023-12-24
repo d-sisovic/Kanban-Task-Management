@@ -12,11 +12,7 @@ export class ContentHttpService {
 
   private readonly assetsUrl: string = 'assets/data.json';
 
-  private readonly http: HttpClient;
-
-  constructor() {
-    this.http = inject(HttpClient);
-  }
+  private readonly http = inject(HttpClient);
 
   public fetchBoardData$(): Observable<IBoard[]> {
     const storedBoards = this.getStoredBoards();
