@@ -2,6 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IBoard } from '../../../ts/models/board.model';
 import { ColumnComponent } from './components/column/column.component';
 import { ContentStoreService } from './services/content-store.service';
+import { AddColumnComponent } from '../add-column/add-column.component';
 import { EmptyBoardComponent } from './components/empty-board/empty-board.component';
 import { ChangeDetectionStrategy, Component, OnInit, Signal, inject, signal } from '@angular/core';
 
@@ -10,6 +11,7 @@ import { ChangeDetectionStrategy, Component, OnInit, Signal, inject, signal } fr
   standalone: true,
   imports: [
     ColumnComponent,
+    AddColumnComponent,
     EmptyBoardComponent
   ],
   templateUrl: './content.component.html',

@@ -1,16 +1,28 @@
+@if(selectedTask(); as selectedTask) {
 <div class="container">
-  <h1 class="heading--l">{{data.task.title}}</h1>
+  <div class="container__header">
+    <h1 class="heading--l">{{selectedTask.title}}</h1>
 
-  <h3 class="text">{{data.task.description}}</h3>
-
-  <p class="text--bold">Subtasks ({{data.completedAmount}} of {{data.task.subtasks.length}})</p>
-
-  <div class="subtask">
-    @for(subtask of data.task.subtasks; track subtask.title) {
-    <app-subtask-modal [subtask]="subtask"></app-subtask-modal>
-    }
+    <img src="assets/images/icon-vertical-ellipsis.svg" alt="icon-vertical-ellipsis">
   </div>
 
-  <app-select [label]="'Current Status'" [values]="dropdownValues" [selectedValue]="data.task.status"
+  @if(selectedTask.description; as description) {
+  <h3 class="text">{{description}}</h3>
+  }
+
+  <div>
+    <p class="text--bold">
+      Subtasks ({{selectedTask.subtasks | subtaskCompletedCount}} of {{selectedTask.subtasks.length}})
+    </p>
+
+    <div class="subtask">
+      @for(subtask of selectedTask.subtasks; track subtask.title) {
+      <app-subtask-modal [subtask]="subtask"></app-subtask-modal>
+      }
+    </div>
+  </div>
+
+  <app-select [label]="'Current Status'" [values]="dropdownValues" [selectedValue]="selectedTask.status"
     (emitChangeSelectValue)="onChangeTaskStatus($event)"></app-select>
 </div>
+}

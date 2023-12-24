@@ -1,0 +1,22 @@
+import { AddColumnComponent } from './add-column.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+describe('AddColumnComponent', () => {
+  let component: AddColumnComponent;
+  let fixture: ComponentFixture<AddColumnComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [AddColumnComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(AddColumnComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

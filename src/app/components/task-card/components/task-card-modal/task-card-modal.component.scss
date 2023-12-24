@@ -6,6 +6,13 @@
   padding: 2.4rem;
   flex-direction: column;
 
+  &__header {
+    gap: 1.6rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
   .text {
     font-weight: 500;
     color: variables.$medium-grey;

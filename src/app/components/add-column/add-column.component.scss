@@ -1,0 +1,15 @@
+@use "../../../styles/variables";
+
+.container {
+  top: 4rem;
+  width: 28rem;
+  display: flex;
+  position: relative;
+  align-items: center;
+  margin-right: 1.6rem;
+  border-radius: 0.6rem;
+  justify-content: center;
+  height: calc(100% - 3.9rem);
+  color: variables.$medium-grey;
+  background: linear-gradient(180deg, #E9EFFA 0%, rgba(233, 239, 250, 0.50) 100%);
+}
