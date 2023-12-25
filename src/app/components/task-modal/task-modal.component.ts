@@ -1,5 +1,6 @@
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InputComponent } from '../ui/input/input.component';
+import { UtilUiService } from '../../services/util-ui.service';
 import { SelectComponent } from '../ui/select/select.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '../ui/button/button.component';
@@ -25,6 +26,7 @@ import { TaskModalSubtaskComponent } from './components/task-modal-subtask/task-
 })
 export class TaskModalComponent implements OnInit {
 
+  private readonly utilUiService = inject(UtilUiService);
   private readonly taskModalService = inject(TaskModalService);
   private readonly contentStoreService = inject(ContentStoreService);
 
@@ -48,7 +50,10 @@ export class TaskModalComponent implements OnInit {
   }
 
   public onSubmitForm(): void {
-    console.log(this.taskForm.value);
+    const selectedBoardName = this.contentStoreService.getSelectedBoard()?.name || null;
+
+    this.contentStoreService.addNewTask(this.taskForm.value, selectedBoardName);
+    this.utilUiService.emitCloseDialogEvent();
   }
 
   private setButtonText(): void {

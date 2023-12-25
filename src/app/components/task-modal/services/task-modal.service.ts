@@ -10,8 +10,7 @@ export class TaskModalService {
 
   public buildTaskModalForm(): FormGroup {
     return this.formBuilder.group({
-      status: [''],
-      subtasks: this.formBuilder.array([])
+      status: ['']
     });
   }
 }

@@ -3,6 +3,7 @@ import { IBoard } from '../../../../ts/models/board.model';
 import { IColumn } from '../../../../ts/models/column.model';
 import { ISubtask } from '../../../../ts/models/subtask.model';
 import { ILabelValue } from '../../../../ts/models/label-value.model';
+import { ITaskForm } from '../../task-modal/ts/models/task-form.model';
 import { Injectable, Signal, WritableSignal, computed, signal } from '@angular/core';
 
 @Injectable({
@@ -82,6 +83,31 @@ export class ContentStoreService {
 
       return [...accumulator, { ...board, columns: updatedColumns }];
     }, [] as IBoard[]));
+  }
+
+  // Handles adding new task in selected column
+  public addNewTask(taskForm: ITaskForm, selectedBoardName: string | null): void {
+    this.boardState.update(previous => (previous || []).map(board => {
+      if (board.name !== selectedBoardName) { return board; }
+
+      return { ...board, columns: this.addNewTaskToColumn(board.columns, taskForm) };
+    }));
+  }
+
+  // Adds new task in selected column
+  private addNewTaskToColumn(columns: IColumn[], taskForm: ITaskForm): IColumn[] {
+    return columns.map(column => {
+      const { tasks, name } = column;
+
+      return name !== taskForm.status ? column : { ...column, tasks: [this.createNewTaskFromForm(taskForm), ...tasks] };
+    });
+  }
+
+  // Creates new ITask model from task form
+  private createNewTaskFromForm(taskForm: ITaskForm): ITask {
+    const { title, description, status, subtasks } = taskForm;
+
+    return { title, description, status, subtasks: subtasks.map(title => ({ title, isCompleted: false })) };
   }
 
   // Updates subtasks status in board column
