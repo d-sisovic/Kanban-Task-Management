@@ -39,6 +39,8 @@ export class TaskModalSubtaskComponent implements OnInit, OnDestroy {
   public formArray!: FormArray;
 
   public ngOnInit(): void {
+    this.parentFormGroup.addControl(this.controlName, this.formBuilder.array([this.getNewFormControl]));
+
     this.formArray = this.parentFormGroup.controls[this.controlName] as FormArray;
   }
 
