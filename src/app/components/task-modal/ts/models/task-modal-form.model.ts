@@ -1,4 +1,4 @@
-export interface ITaskForm {
+export interface ITaskModalForm {
   title: string;
   status: string;
   subtasks: string[];

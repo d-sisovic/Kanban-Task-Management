@@ -90,10 +90,21 @@ mat-form-field {
 }
 
 .cdk-overlay-pane {
+  max-width: calc(100vw - 3.2rem);
   max-height: calc(100vh - 3.2rem);
 }
 
+.mat-mdc-menu-item {
+  @extend .text--bold;
+  padding: 1rem !important;
+  min-height: 0 !important;
+}
+
 // Custom classes
+
+.menu__item--red {
+  color: variables.$red;
+}
 
 .input__label {
   @extend .text--bold;

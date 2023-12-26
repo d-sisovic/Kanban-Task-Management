@@ -10,10 +10,6 @@
 
   &:hover {
     background: variables.$main-purple-hover;
-
-    .button--secondary {
-      background: rgba(variables.$main-purple, 0.25);
-    }
   }
 
   &:disabled {
@@ -24,6 +20,19 @@
   &--secondary {
     color: variables.$main-purple;
     background: rgba(variables.$main-purple, 0.10);
+
+    &:hover {
+      background: rgba(variables.$main-purple, 0.25);
+    }
+  }
+
+  &--danger {
+    color: variables.$white;
+    background: variables.$red;
+
+    &:hover {
+      background: variables.$red-hover;
+    }
   }
 
   &--large {
