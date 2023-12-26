@@ -1,8 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
 import { IBoard } from '../../../ts/models/board.model';
 import { ColumnComponent } from './components/column/column.component';
-import { ContentStoreService } from './services/content-store.service';
 import { AddColumnComponent } from '../add-column/add-column.component';
+import { StoreBoardService } from './services/store/store-board.service';
 import { EmptyBoardComponent } from './components/empty-board/empty-board.component';
 import { ChangeDetectionStrategy, Component, OnInit, Signal, inject, signal } from '@angular/core';
 
@@ -21,13 +21,13 @@ import { ChangeDetectionStrategy, Component, OnInit, Signal, inject, signal } fr
 export class ContentComponent implements OnInit {
 
   private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly contentStoreService = inject(ContentStoreService);
+  private readonly storeBoardService = inject(StoreBoardService);
 
   public selectedBoard: Signal<IBoard | null> = signal(null);
 
   public ngOnInit(): void {
-    this.selectedBoard = this.contentStoreService.getSelectedBoard;
+    this.selectedBoard = this.storeBoardService.getSelectedBoard;
 
-    this.contentStoreService.setBoards(this.activatedRoute.snapshot.data['data']);
+    this.storeBoardService.setBoards(this.activatedRoute.snapshot.data['data']);
   }
 }

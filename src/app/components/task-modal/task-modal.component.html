@@ -1,6 +1,6 @@
 <form [formGroup]="taskForm" class="container">
   <h1 class="heading--l">
-    @if(data.addMode) {
+    @if(isAddMode) {
     Add New Task
     } @else {
     Edit Task
@@ -14,11 +14,14 @@
     controlName="description">
   </app-input>
 
-  <app-task-modal-subtask [controlName]="'subtasks'"></app-task-modal-subtask>
+  <app-task-modal-subtask [controlName]="'subtasks'" [existingSubtasks]="data.selectedTask?.subtasks || []"
+    (subtasksChangedEvent)="onSetNewSubtasks($event)">
+  </app-task-modal-subtask>
 
-  <app-select [label]="'Status'" [values]="dropdownValues" [selectedValue]="selectedStatus"
+  <app-select [label]="'Status'" [values]="dropdownValues" [selectedValue]="getSelectedStatusControl.value"
     (emitChangeSelectValue)="onChangeTaskStatus($event)">
   </app-select>
 
-  <app-button [label]="buttonText" [disabled]="!taskForm.valid" (clickHandler)="onSubmitForm()"></app-button>
+  <app-button [label]="buttonText" [disabled]="!taskForm.valid || !formChanged" (clickHandler)="onSubmitForm()">
+  </app-button>
 </form>

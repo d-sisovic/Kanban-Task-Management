@@ -2,7 +2,7 @@
   <span class="input__label">Subtasks</span>
 
   <div class="container__input" [formArrayName]="controlName">
-    @for(control of formArray.controls; let index = $index; track index) {
+    @for(control of formArray.controls; let index = $index; track control.value || index) {
     <div class="container__row">
       <mat-form-field [ngClass]="{'input--error': control.hasError('required')}">
         <input matInput [placeholder]="'e.g. Make coffee ' + (index + 1)" [formControlName]="index + ''"

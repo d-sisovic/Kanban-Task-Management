@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { UtilUiService } from './util-ui.service';
+import { StoreBoardService } from './store-board.service';
 
-describe('UtilUiService', () => {
-  let service: UtilUiService;
+describe('StoreBoardService', () => {
+  let service: StoreBoardService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(UtilUiService);
+    service = TestBed.inject(StoreBoardService);
   });
 
   it('should be created', () => {

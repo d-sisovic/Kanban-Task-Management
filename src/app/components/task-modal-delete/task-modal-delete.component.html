@@ -1,0 +1,11 @@
+<div class="container">
+  <h1 class="heading--l">Delete this task?</h1>
+
+  <p class="text">Are you sure you want to delete the '{{data.selectedTask.title}}' task and its subtasks? This action cannot be reversed.</p>
+
+  <div class="footer">
+    <app-button label="Delete" [color]="getButtonColor.DANGER" (clickHandler)="onDeleteTask()"></app-button>
+
+    <app-button label="Cancel" [color]="getButtonColor.SECONDARY" (clickHandler)="onCloseModal()"></app-button>
+  </div>
+</div>
