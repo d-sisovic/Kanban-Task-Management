@@ -1,12 +1,12 @@
 import { NgClass } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
+import { InputComponent } from '../ui/input/input.component';
+import { ButtonColor } from '../../ts/enums/button-color.enum';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ISubtask } from '../../../../../ts/models/subtask.model';
+import { ButtonComponent } from '../ui/button/button.component';
+import { createTrimWhitespaceValidator } from '../../utils/util';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { InputComponent } from '../../../ui/input/input.component';
-import { ButtonColor } from '../../../../ts/enums/button-color.enum';
-import { ButtonComponent } from '../../../ui/button/button.component';
-import { createTrimWhitespaceValidator } from '../../../../utils/util';
+import { ModalFormArray } from './ts/types/modal-form-array.type';
 import { ControlContainer, FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
   AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, EventEmitter,
@@ -15,7 +15,7 @@ import {
 import * as uuid from 'uuid';
 
 @Component({
-  selector: 'app-task-modal-subtask',
+  selector: 'app-modal-form-array',
   standalone: true,
   imports: [
     NgClass,
@@ -31,51 +31,55 @@ import * as uuid from 'uuid';
       useFactory: () => inject(ControlContainer, { skipSelf: true })
     }
   ],
-  templateUrl: './task-modal-subtask.component.html',
-  styleUrl: './task-modal-subtask.component.scss',
+  templateUrl: './modal-form-array.component.html',
+  styleUrl: './modal-form-array.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TaskModalSubtaskComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ModalFormArrayComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @Output() subtasksChangedEvent: EventEmitter<ISubtask[]> = new EventEmitter<ISubtask[]>();
+  @Output() itemsChangedEvent: EventEmitter<ModalFormArray[]> = new EventEmitter<ModalFormArray[]>();
 
-  @Input() existingSubtasks: ISubtask[] = [];
+  @Input() subtaskMode: boolean = true;
+  @Input() existingItems: ModalFormArray[] = [];
+  @Input({ required: true }) label: string = '';
   @Input({ required: true }) controlName: string = '';
 
   private readonly destroyRef = inject(DestroyRef);
   private readonly formBuilder = inject(FormBuilder);
   private readonly parentContainer = inject(ControlContainer);
 
+  public addNewText!: string;
   public formArray!: FormArray;
-  private subtasks: WritableSignal<ISubtask[]> = signal([]);
+  private items: WritableSignal<ModalFormArray[]> = signal([]);
 
   constructor() {
-    effect(() => this.subtasksChangedEvent.emit(this.subtasks()));
+    effect(() => this.itemsChangedEvent.emit(this.items()));
   }
 
   public ngOnInit(): void {
-    this.parentFormGroup.addControl(this.controlName, this.formBuilder.array([this.getNewFormControl]));
+    this.setAddTextButton();
 
+    this.parentFormGroup.addControl(this.controlName, this.formBuilder.array([this.getNewFormControl]));
     this.formArray = this.parentFormGroup.controls[this.controlName] as FormArray;
   }
 
   public ngAfterViewInit(): void {
     this.watchFormArrayChanges();
-    this.subtasks.set(this.existingSubtasks);
+    this.items.set(this.existingItems);
   }
 
   public ngOnDestroy(): void {
     this.parentFormGroup.removeControl(this.controlName);
   }
 
-  public onRemoveSubtask(index: number): void {
+  public onRemoveItem(index: number): void {
     this.formArray.removeAt(index, { emitEvent: false });
-    this.filterExistingSubtask(index);
+    this.filterExistingItem(index);
   }
 
-  public onAddSubtask(): void {
+  public onAddItem(): void {
     this.formArray.push(this.getNewFormControl, { emitEvent: false });
-    this.createNewSubtask();
+    this.createNewItem();
   }
 
   public get parentFormGroup(): FormGroup {
@@ -86,21 +90,40 @@ export class TaskModalSubtaskComponent implements OnInit, AfterViewInit, OnDestr
     return ButtonColor;
   }
 
+  private setAddTextButton(): void {
+    this.addNewText = !this.subtaskMode ? '+ Add New Column' : '+ Add New Subtask';
+  }
+
   private watchFormArrayChanges(): void {
     this.formArray.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(formValues => {
-        this.subtasks.update(previous => previous.map((subtask, index) => ({ ...subtask, title: formValues[index] })));
+        this.items.update(previous => previous.map((item, index) => ({ ...item, [this.getNewItemKey]: formValues[index] })));
       });
   }
 
-  private createNewSubtask(): void {
-    this.subtasks.update(previous => [...previous, { id: uuid.v4(), title: '', isCompleted: false }]);
+  private createNewItem(): void {
+    this.items.update(previous => [...previous, this.getNewItem]);
+    this.emitFormValueChanges();
   }
 
-  private filterExistingSubtask(selectedIndex: number): void {
-    this.subtasks.update(previous => previous.filter((_, index) => index !== selectedIndex));
+  private filterExistingItem(selectedIndex: number): void {
+    this.items.update(previous => previous.filter((_, index) => index !== selectedIndex));
+    this.emitFormValueChanges();
+  }
+
+  private emitFormValueChanges(): void {
     this.parentFormGroup.updateValueAndValidity();
+  }
+
+  private get getNewItemKey(): string {
+    return this.subtaskMode ? 'title' : 'name';
+  }
+
+  private get getNewItem(): ModalFormArray {
+    const id = uuid.v4();
+
+    return this.subtaskMode ? { id, title: '', isCompleted: false } : { id, name: '', tasks: [] };
   }
 
   private get getNewFormControl(): FormControl {

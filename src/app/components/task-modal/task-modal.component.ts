@@ -1,20 +1,20 @@
-import { map } from 'rxjs';
 import { ITask } from '../../../ts/models/task.model';
+import { IBoard } from '../../../ts/models/board.model';
 import { ISubtask } from '../../../ts/models/subtask.model';
+import { AddEditModal } from '../../classes/add-edit-modal';
 import { InputComponent } from '../ui/input/input.component';
 import { SelectComponent } from '../ui/select/select.component';
 import { ButtonComponent } from '../ui/button/button.component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { createTrimWhitespaceValidator } from '../../utils/util';
 import { TaskModalService } from './services/task-modal.service';
 import { ILabelValue } from '../../../ts/models/label-value.model';
 import { ITaskModalForm } from './ts/models/task-modal-form.model';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { StoreTaskService } from '../content/services/store/store-task.service';
 import { StoreBoardService } from '../content/services/store/store-board.service';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TaskModalSubtaskComponent } from './components/task-modal-subtask/task-modal-subtask.component';
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, Inject, OnInit, inject } from '@angular/core';
+import { ModalFormArray } from '../modal-form-array/ts/types/modal-form-array.type';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ModalFormArrayComponent } from '../modal-form-array/modal-form-array.component';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnInit, inject } from '@angular/core';
 import * as uuid from 'uuid';
 
 @Component({
@@ -25,37 +25,35 @@ import * as uuid from 'uuid';
     SelectComponent,
     ButtonComponent,
     ReactiveFormsModule,
-    TaskModalSubtaskComponent
+    ModalFormArrayComponent
   ],
   templateUrl: './task-modal.component.html',
   styleUrl: './task-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TaskModalComponent implements OnInit, AfterViewInit {
+export class TaskModalComponent extends AddEditModal implements OnInit, AfterViewInit {
 
   private readonly dialogRef = inject(MatDialog);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly formBuilder = inject(FormBuilder);
   private readonly taskModalService = inject(TaskModalService);
   private readonly storeTaskService = inject(StoreTaskService);
   private readonly storeBoardService = inject(StoreBoardService);
 
-  public isAddMode!: boolean;
   public buttonText!: string;
   public taskForm!: FormGroup;
-  public formChanged!: boolean;
   public dropdownValues: ILabelValue[] = [];
 
   private initialFormValues!: ITask;
   private newSubtasks: ISubtask[] = [];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { selectedTask: ITask | null }) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { selectedTask: ITask | null }) {
+    super();
+  }
 
   public ngOnInit(): void {
     this.taskForm = this.taskModalService.buildTaskModalForm();
     this.dropdownValues = this.storeBoardService.getTaskStatus();
 
-    this.setIsAddMode();
+    super.setIsAddMode(this.data.selectedTask === null);
     this.setButtonText();
     this.setSelectedStatus(this.dropdownValues[0]?.value || '');
   }
@@ -74,17 +72,25 @@ export class TaskModalComponent implements OnInit, AfterViewInit {
 
     const { value } = this.taskForm;
     const id = this.data.selectedTask?.id || uuid.v4();
-    const selectedBoardId = this.storeBoardService.getSelectedBoard()?.id || null;
+    const selectedBoardId = (this.storeBoardService.getSelectedBoard() as IBoard).id;
 
     this.isAddMode ? this.handleAddTask(value, id, selectedBoardId) : this.handleUpdateTask(value, id, selectedBoardId);
   }
 
-  public onSetNewSubtasks(newSubtasks: ISubtask[]): void {
-    this.newSubtasks = newSubtasks.slice();
+  public onSetNewSubtasks(newSubtasks: ModalFormArray[]): void {
+    this.newSubtasks = newSubtasks.slice() as ISubtask[];
   }
 
   public get getSelectedStatusControl(): FormControl {
     return this.taskForm.get('status') as FormControl;
+  }
+
+  public override watchFormValueChanges(): void {
+    if (this.isAddMode) { return; }
+
+    this.initialFormValues = { ...this.taskForm.value };
+
+    super.watchFormValueChanges(this.taskForm, this.initialFormValues);
   }
 
   private handleAddTask(formValues: ITaskModalForm, id: string, selectedBoardId: string | null): void {
@@ -112,35 +118,14 @@ export class TaskModalComponent implements OnInit, AfterViewInit {
     this.dialogRef.closeAll();
   }
 
-  private watchFormValueChanges(): void {
-    if (this.isAddMode) { return; }
-
-    this.initialFormValues = { ...this.taskForm.value };
-
-    this.taskForm.valueChanges
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        map(formValues => JSON.stringify(formValues) !== JSON.stringify(this.initialFormValues))
-      )
-      .subscribe(formChanged => this.formChanged = formChanged);
-  }
-
   private setFormValues(): void {
     if (this.isAddMode) { return; }
 
     const { title, description, status, subtasks } = this.data.selectedTask as ITask;
 
-    subtasks
-      .slice(1, subtasks.length)
-      .map(() => this.formBuilder.control('', [createTrimWhitespaceValidator()]))
-      .forEach(control => this.getSubtasksFormArray.push(control))
+    super.setFormArrayValues(subtasks, this.getSubtasksFormArray);
 
     this.taskForm.patchValue({ title, description, status, subtasks: subtasks.map(subtask => subtask.title) });
-  }
-
-  private setIsAddMode(): void {
-    this.isAddMode = this.data.selectedTask === null;
-    this.formChanged = this.isAddMode;
   }
 
   private setButtonText(): void {

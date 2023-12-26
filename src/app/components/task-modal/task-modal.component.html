@@ -1,4 +1,4 @@
-<form [formGroup]="taskForm" class="container">
+<form [formGroup]="taskForm" class="modal">
   <h1 class="heading--l">
     @if(isAddMode) {
     Add New Task
@@ -14,9 +14,9 @@
     controlName="description">
   </app-input>
 
-  <app-task-modal-subtask [controlName]="'subtasks'" [existingSubtasks]="data.selectedTask?.subtasks || []"
-    (subtasksChangedEvent)="onSetNewSubtasks($event)">
-  </app-task-modal-subtask>
+  <app-modal-form-array [controlName]="'subtasks'" [existingItems]="data.selectedTask?.subtasks || []"
+    (itemsChangedEvent)="onSetNewSubtasks($event)" [label]="'Subtasks'">
+  </app-modal-form-array>
 
   <app-select [label]="'Status'" [values]="dropdownValues" [selectedValue]="getSelectedStatusControl.value"
     (emitChangeSelectValue)="onChangeTaskStatus($event)">

@@ -90,7 +90,6 @@ mat-form-field {
 }
 
 .cdk-overlay-pane {
-  max-width: calc(100vw - 3.2rem);
   max-height: calc(100vh - 3.2rem);
 }
 
@@ -101,6 +100,13 @@ mat-form-field {
 }
 
 // Custom classes
+
+.modal {
+  gap: 2.4rem;
+  display: flex;
+  padding: 2.4rem;
+  flex-direction: column;
+}
 
 .menu__item--red {
   color: variables.$red;

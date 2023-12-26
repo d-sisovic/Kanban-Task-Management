@@ -1,5 +1,13 @@
+@use "../../../../../styles/variables";
+
 .container {
   gap: 2rem;
   display: flex;
   flex-direction: column;
+
+  &--empty {
+    height: 100vh;
+    border-radius: 0.6rem;
+    outline: 0.2rem dashed variables.$medium-grey;
+  }
 }

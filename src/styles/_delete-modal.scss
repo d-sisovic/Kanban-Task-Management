@@ -1,0 +1,17 @@
+@use "./variables";
+
+.modal {
+  .heading--l {
+    color: variables.$red;
+  }
+
+  .text {
+    color: variables.$medium-grey;
+  }
+
+  .footer {
+    gap: 1.6rem;
+    display: flex;
+    flex-direction: column;
+  }
+}

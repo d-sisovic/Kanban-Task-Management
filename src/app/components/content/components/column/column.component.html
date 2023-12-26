@@ -1,7 +1,7 @@
-<app-column-header [name]="column.name" [index]="index" [numberOfTasks]="column.tasks.length"></app-column-header>
+<app-column-header [index]="index" [name]="column.name" [numberOfTasks]="column.tasks.length"></app-column-header>
 
-<div class="container">
-  @for(task of column.tasks; track task.title) {
-    <app-task-card [task]="task"></app-task-card>
+<div class="container" [ngClass]="{'container--empty': !column.tasks.length}">
+  @for(task of column.tasks; track task.id) {
+  <app-task-card [task]="task"></app-task-card>
   }
 </div>

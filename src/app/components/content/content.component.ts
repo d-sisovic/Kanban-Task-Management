@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { IBoard } from '../../../ts/models/board.model';
 import { ColumnComponent } from './components/column/column.component';
@@ -10,6 +11,7 @@ import { ChangeDetectionStrategy, Component, OnInit, Signal, inject, signal } fr
   selector: 'app-content',
   standalone: true,
   imports: [
+    NgClass,
     ColumnComponent,
     AddColumnComponent,
     EmptyBoardComponent
