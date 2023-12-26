@@ -1,5 +1,5 @@
 <div class="container">
-  <span class="dot" [ngClass]="{'dot--todo': index === 0, 'dot--doing': index === 1, 'dot--done': index === 2}"></span>
+  <span class="dot" [ngStyle]="{'background-color': index | columnImgColor}"></span>
 
   <h3 class="heading--s">{{name}} ({{numberOfTasks}})</h3>
 </div>

@@ -1,12 +1,7 @@
 @use "../../../../../styles/variables";
 
-.container {
-  gap: 2.4rem;
-  display: flex;
-  padding: 2.4rem;
-  flex-direction: column;
-
-  &__header {
+.modal {
+  .header {
     gap: 1.6rem;
     display: flex;
     align-items: flex-start;

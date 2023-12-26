@@ -1,17 +1,21 @@
-<div class="container">
-  @if(selectedBoard(); as selectedBoard) {
+<div class="container" [ngClass]="{'container--empty': !selectedBoard()?.columns?.length}">
+  <div class="subcontainer">
+    @if(selectedBoard(); as selectedBoard) {
 
-  <div class="column">
-    @for(column of selectedBoard.columns; track column.name; let index = $index) {
-    <app-column [column]="column" [index]="index"></app-column>
-    } @empty {
+    <div class="column">
+      @for(column of selectedBoard.columns; track column.id; let index = $index) {
+      <app-column [column]="column" [index]="index"></app-column>
+      } @empty {
+      <app-empty-board></app-empty-board>
+      }
+
+      @if(selectedBoard.columns.length) {
+        <app-add-column></app-add-column>
+      }
+    </div>
+
+    } @else {
     <app-empty-board></app-empty-board>
     }
-
-    <app-add-column></app-add-column>
   </div>
-
-  } @else {
-  <app-empty-board></app-empty-board>
-  }
 </div>

@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { IColumn } from '../../../../../ts/models/column.model';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TaskCardComponent } from '../../../task-card/task-card.component';
@@ -7,6 +8,7 @@ import { ColumnHeaderComponent } from '../column-header/column-header.component'
   selector: 'app-column',
   standalone: true,
   imports: [
+    NgClass,
     TaskCardComponent,
     ColumnHeaderComponent
   ],
@@ -18,5 +20,4 @@ export class ColumnComponent {
 
   @Input({ required: true }) index!: number;
   @Input({ required: true }) column!: IColumn;
-
 }

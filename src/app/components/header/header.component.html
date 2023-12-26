@@ -1,18 +1,25 @@
 <div class="container">
-  <div class="nested-subcontainer">
+  <div class="nested-subcontainer" (click)="onOpenMenu()">
     <div class="subcontainer">
       <img src="assets/images/logo-mobile.svg" alt="logo-mobile">
 
       <h1 class="heading--l">{{selectedBoard()?.name}}</h1>
     </div>
 
-    <img src="assets/images/icon-chevron-down.svg" alt="icon-chevron-down">
+    <img src="assets/images/icon-chevron-down.svg" alt="icon-chevron-down" class="chevron"
+      [@rotateChevron]="isRotated ? 'open' : 'closed'">
   </div>
 
   <div class="subcontainer">
-    <img src="assets/images/icon-plus-button.svg" alt="icon-plus-button"
-      [ngClass]="{'add--disabled': !selectedBoard()}" (click)="onAddTask()">
+    <img src="assets/images/icon-plus-button.svg" alt="icon-plus-button" [ngClass]="{'add--disabled': !selectedBoard()}"
+      (click)="onAddTask()">
 
-    <img src="assets/images/icon-vertical-ellipsis.svg" alt="icon-vertical-ellipsis">
+    <img src="assets/images/icon-vertical-ellipsis.svg" alt="icon-vertical-ellipsis" mat-button
+      [matMenuTriggerFor]="menu">
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onEditBoard()">Edit Board</button>
+      <button mat-menu-item><span class="menu__item--red" (click)="onDeleteTask()">Delete Board</span></button>
+    </mat-menu>
   </div>
 </div>

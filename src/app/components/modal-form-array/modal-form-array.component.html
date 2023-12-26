@@ -1,5 +1,5 @@
 <div class="container">
-  <span class="input__label">Subtasks</span>
+  <span class="input__label">{{label}}</span>
 
   <div class="container__input" [formArrayName]="controlName">
     @for(control of formArray.controls; let index = $index; track control.value || index) {
@@ -13,10 +13,10 @@
         }
       </mat-form-field>
 
-      <img src="assets/images/icon-cross.svg" alt="close" (click)="onRemoveSubtask(index)">
+      <img src="assets/images/icon-cross.svg" alt="close" (click)="onRemoveItem(index)">
     </div>
     }
   </div>
 
-  <app-button label="+ Add New Subtask" [color]="getButtonColor.SECONDARY" (clickHandler)="onAddSubtask()"></app-button>
+  <app-button [label]="addNewText" [color]="getButtonColor.SECONDARY" (clickHandler)="onAddItem()"></app-button>
 </div>

@@ -1,0 +1,24 @@
+<div class="container">
+  @if(boards(); as boards) {
+  <h1 class="heading">ALL BOARDS ({{boards.length}})</h1>
+
+  <div class="container__menu">
+    @for(board of boards; track board.id; let index = $index) {
+    <div class="container__menu__item" [ngClass]="{'container__menu__item--selected': board.selected}"
+      (click)="onSelectBoard(index)">
+      <img src="assets/images/icon-board.svg" alt="icon-board">
+
+      <h3 class="heading--m">{{board.name}}</h3>
+    </div>
+    }
+
+    <div class="container__menu__item container__menu__item--new" (click)="onCreateNewBoard()">
+      <img src="assets/images/icon-board-new.svg" alt="icon-board">
+
+      <h3 class="heading--m">+ Create New Board</h3>
+    </div>
+  </div>
+
+  <app-theme-switcher></app-theme-switcher>
+  }
+</div>

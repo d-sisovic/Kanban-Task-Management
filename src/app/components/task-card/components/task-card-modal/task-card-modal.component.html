@@ -1,14 +1,14 @@
 @if(selectedTask(); as selectedTask) {
-<div class="container">
-  <div class="container__header">
+<div class="modal">
+  <div class="header">
     <h1 class="heading--l">{{selectedTask.title}}</h1>
 
     <img src="assets/images/icon-vertical-ellipsis.svg" alt="icon-vertical-ellipsis" mat-button
       [matMenuTriggerFor]="menu">
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="onEditTask()">Edit</button>
-      <button mat-menu-item><span class="menu__item--red" (click)="onDeleteTask()">Delete</span></button>
+      <button mat-menu-item (click)="onEditTask()">Edit Task</button>
+      <button mat-menu-item><span class="menu__item--red" (click)="onDeleteTask()">Delete Task</span></button>
     </mat-menu>
   </div>
 
@@ -22,7 +22,7 @@
     </p>
 
     <div class="subtask">
-      @for(subtask of selectedTask.subtasks; track subtask.title) {
+      @for(subtask of selectedTask.subtasks; track subtask.id) {
       <app-subtask-modal [subtask]="subtask"></app-subtask-modal>
       }
     </div>

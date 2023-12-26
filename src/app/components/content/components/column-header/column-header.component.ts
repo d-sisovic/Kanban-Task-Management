@@ -1,10 +1,14 @@
-import { NgClass } from '@angular/common';
+import { NgStyle } from '@angular/common';
+import { ColumnImgColorPipe } from '../../pipes/column-img-color.pipe';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-column-header',
   standalone: true,
-  imports: [NgClass],
+  imports: [
+    NgStyle,
+    ColumnImgColorPipe
+  ],
   templateUrl: './column-header.component.html',
   styleUrl: './column-header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

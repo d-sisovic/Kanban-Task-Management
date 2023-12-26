@@ -1,0 +1,45 @@
+@use "../../../styles/variables";
+
+.container {
+  width: 26.4rem;
+  padding-top: 1.6rem;
+  padding-right: 2.4rem;
+  color: variables.$medium-grey;
+
+  .heading {
+    font-size: 1.2rem;
+    line-height: normal;
+    padding-left: 2.4rem;
+    letter-spacing: 2.4px;
+    padding-bottom: 1.9rem;
+    text-transform: uppercase;
+    font-family: "PlusJakartaSans-Medium";
+  }
+
+  &__menu {
+    margin-bottom: 1.6rem;
+
+    &__item {
+      gap: 1.2rem;
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      padding: 1.4rem 2.4rem;
+
+      &--new {
+        color: variables.$main-purple;
+      }
+
+      &:hover,
+      &--selected {
+        color: variables.$white;
+        border-radius: 0 10rem 10rem 0;
+        background: variables.$main-purple;
+
+        img {
+          content: url("/assets/images/icon-board-white.svg");
+        }
+      }
+    }
+  }
+}

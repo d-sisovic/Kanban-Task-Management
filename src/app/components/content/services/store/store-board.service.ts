@@ -1,3 +1,4 @@
+import { ITask } from '../../../../../ts/models/task.model';
 import { IBoard } from '../../../../../ts/models/board.model';
 import { IColumn } from '../../../../../ts/models/column.model';
 import { ILabelValue } from '../../../../../ts/models/label-value.model';
@@ -16,6 +17,30 @@ export class StoreBoardService {
   // Sets initial boards to signal
   public setBoards(boards: IBoard[]): void {
     this.boards.set(this.formatInitialBoards(boards));
+  }
+
+  // Delete selected board by boardId
+  public deleteBoard(boardId: string): void {
+    this.boards.update(previous => this.formatInitialBoards((previous || []).filter(board => board.id !== boardId)));
+  }
+
+  // Creates new board
+  public createNewBoard(name: string, id: string, columns: IColumn[]): void {
+    this.boards.update(previous => [...(previous || []).map(board => ({ ...board, selected: false })), { name, id, columns, selected: true }]);
+  }
+
+  // Update board title or column names
+  public updateBoard(name: string, boardId: string, columns: IColumn[]): void {
+    this.boards.update(previous => this.formatInitialBoards((previous || []).map(board => {
+      if (board.id !== boardId) { return board; }
+
+      return { ...board, name, columns: columns.map(column => ({ ...column, tasks: this.updateColumnTasksStatus(column) })) };
+    })));
+  }
+
+  // Set selected board
+  public selectBoard(selectedIndex: number): void {
+    this.boards.update(previous => (previous || []).map((board, index) => ({ ...board, selected: index === selectedIndex })));
   }
 
   // Returns whole boards as signal
@@ -39,14 +64,23 @@ export class StoreBoardService {
     });
   }
 
+  // Convert column titles to IColumn[]
+  public createNewColumns(columns: string[]): IColumn[] {
+    return columns.map(name => ({ id: uuid.v4(), name, tasks: [] }));
+  }
+
+  // Updates task status in the column
+  private updateColumnTasksStatus(column: IColumn): ITask[] {
+    return column.tasks.map(task => ({ ...task, status: column.name }));
+  }
+
   // Sets initially selected board by 0 index
   private formatInitialBoards(boards: IBoard[]): IBoard[] {
     return boards.map((board, index) => {
-      const { name } = board;
       const selected = index === 0;
       const columns = this.setBoardDataValueIds(board);
 
-      return { ...board, selected, id: name, columns };
+      return { ...board, selected, id: uuid.v4(), columns };
     });
   }
 

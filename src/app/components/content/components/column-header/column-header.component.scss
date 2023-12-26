@@ -22,17 +22,6 @@
     height: 1.5rem;
     border-radius: 50%;
     display: inline-block;
-
-    &--todo {
-      background: #49C4E5;
-    }
-
-    &--doing {
-      background: #8471F2;
-    }
-
-    &--done {
-      background: #67E2AE;
-    }
+    outline: 1px solid variables.$line-light;
   }
 }
