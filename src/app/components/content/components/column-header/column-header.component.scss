@@ -6,7 +6,7 @@
   align-items: center;
   display: inline-flex;
   margin-bottom: 2.4rem;
-  letter-spacing: 2.4px;
+  letter-spacing: 0.24rem;
   text-transform: uppercase;
   color: variables.$medium-grey;
 
@@ -22,6 +22,6 @@
     height: 1.5rem;
     border-radius: 50%;
     display: inline-block;
-    outline: 1px solid variables.$line-light;
+    outline: 0.1rem solid variables.$line-light;
   }
 }
