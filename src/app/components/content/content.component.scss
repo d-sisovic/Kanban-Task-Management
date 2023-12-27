@@ -1,4 +1,5 @@
 :host {
+  width: 100%;
   height: 100%;
   display: flex;
   overflow-x: auto;
@@ -6,7 +7,13 @@
 }
 
 .container {
+  left: 0;
+  height: 100%;
+  display: flex;
+  min-width: 100%;
+  position: absolute;
   padding: 2.4rem 1.6rem;
+  transition: left .5s ease;
 
   &--empty {
     width: 100%;
@@ -18,6 +25,7 @@
 
   .column {
     gap: 2.4rem;
+    height: 100%;
     display: flex;
     flex-wrap: nowrap;
   }

@@ -45,10 +45,10 @@ $kanban-task-management-theme: mat.define-light-theme((color: (primary: $kanban-
 mat-form-field {
   width: 100%;
   border-radius: 0.4rem;
-  outline: 1px solid rgba(130, 143, 163, 0.25);
+  outline: 0.1rem solid rgba(130, 143, 163, 0.25);
 
   &.mat-focused {
-    outline: 1px solid variables.$main-purple;
+    outline: 0.1rem solid variables.$main-purple;
   }
 }
 
