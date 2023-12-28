@@ -1,8 +1,39 @@
 @use "../styles/variables";
+@use "../styles/breakpoints";
 
 .container {
   height: 100vh;
   display: flex;
+  position: relative;
   flex-direction: column;
   background: variables.$light-grey-light-bg;
+
+  .outlet {
+    height: 100%;
+    overflow: auto;
+    position: relative;
+    transition: left 0.25s linear;
+  }
+}
+
+.icon-show-sidebar {
+  left: 0;
+  z-index: 1;
+  bottom: 3.2rem;
+  position: fixed;
+  cursor: pointer;
+}
+
+@include breakpoints.mq(tablet) {
+  .container {
+    .outlet {
+      left: var(--sidebar-width);
+      width: calc(100vw - var(--sidebar-width));
+
+      &--left {
+        left: 0;
+        width: auto;
+      }
+    }
+  }
 }

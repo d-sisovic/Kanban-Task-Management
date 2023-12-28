@@ -3,13 +3,7 @@
   <div class="header">
     <h1 class="heading--l">{{selectedTask.title}}</h1>
 
-    <img src="assets/images/icon-vertical-ellipsis.svg" alt="icon-vertical-ellipsis" mat-button
-      [matMenuTriggerFor]="menu">
-
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="onEditTask()">Edit Task</button>
-      <button mat-menu-item><span class="menu__item--red" (click)="onDeleteTask()">Delete Task</span></button>
-    </mat-menu>
+    <app-menu (editEvent)="onEditTask()" (deleteEvent)="onDeleteTask()"></app-menu>
   </div>
 
   @if(selectedTask.description; as description) {

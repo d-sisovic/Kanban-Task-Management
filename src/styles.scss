@@ -2,6 +2,7 @@
 @use './styles/fonts';
 @use './styles/variables';
 @use './styles/breakpoints';
+@use './styles/custom-scrollbar';
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
@@ -38,6 +39,8 @@ $kanban-task-management-theme: mat.define-light-theme((color: (primary: $kanban-
 // Angular Material override styles
 
 :root {
+  --heading-height: 8rem;
+  --sidebar-width: 26rem;
   --mdc-dialog-container-shape: 0.6rem;
   --mdc-filled-text-field-container-color: transparent;
 }
@@ -153,4 +156,14 @@ mat-form-field {
   font-size: 1.2rem;
   line-height: 1.5rem;
   font-family: "PlusJakartaSans-Bold";
+}
+
+@include breakpoints.mq(tablet) {
+  body {
+    overflow: hidden;
+  }
+
+  .modal {
+    width: 48rem;
+  }
 }

@@ -4,6 +4,7 @@
   top: 4rem;
   width: 28rem;
   display: flex;
+  cursor: pointer;
   position: relative;
   align-items: center;
   border-radius: 0.6rem;
@@ -11,4 +12,8 @@
   height: calc(100% - 4.4rem);
   color: variables.$medium-grey;
   background: linear-gradient(180deg, #E9EFFA 0%, rgba(233, 239, 250, 0.50) 100%);
+
+  &:hover {
+    color: variables.$main-purple;
+  }
 }

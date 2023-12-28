@@ -1,25 +1,27 @@
-<div class="container">
-  <div class="nested-subcontainer" (click)="onOpenMenu()">
-    <div class="subcontainer">
-      <img src="assets/images/logo-mobile.svg" alt="logo-mobile">
-
-      <h1 class="heading--l">{{selectedBoard()?.name}}</h1>
-    </div>
-
-    <img src="assets/images/icon-chevron-down.svg" alt="icon-chevron-down" class="chevron"
-      [@rotateChevron]="isRotated ? 'open' : 'closed'">
+<div class="container" [ngClass]="{'container--shrink': !expandSidebar()}">
+  <div class="logo">
+    <img src="assets/images/logo-dark.svg" alt="logo-dark">
   </div>
 
-  <div class="subcontainer">
-    <img src="assets/images/icon-plus-button.svg" alt="icon-plus-button" [ngClass]="{'add--disabled': !selectedBoard()}"
-      (click)="onAddTask()">
+  <div class="body">
+    <div class="nested-subcontainer" (click)="onOpenMenu()">
+      <div class="subcontainer">
+        <img src="assets/images/logo-mobile.svg" alt="logo-mobile" class="logo-mobile">
 
-    <img src="assets/images/icon-vertical-ellipsis.svg" alt="icon-vertical-ellipsis" mat-button
-      [matMenuTriggerFor]="menu">
+        <h1 class="heading--l platform-name">{{selectedBoard()?.name}}</h1>
+      </div>
 
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="onEditBoard()">Edit Board</button>
-      <button mat-menu-item><span class="menu__item--red" (click)="onDeleteTask()">Delete Board</span></button>
-    </mat-menu>
+      <img src="assets/images/icon-chevron-down.svg" alt="icon-chevron-down" class="chevron"
+        [@rotateChevron]="isRotated() ? 'open' : 'closed'">
+    </div>
+
+    <div class="subcontainer">
+      <app-button label="+ Add New Task" [small]="false" class="button" (clickHandler)="onAddTask()"></app-button>
+
+      <img src="assets/images/icon-plus-button.svg" alt="icon-plus-button"
+        [ngClass]="{'add--disabled': !selectedBoard()}" class="icon-plus-button" (click)="onAddTask()">
+
+      <app-menu (editEvent)="onEditBoard()" (deleteEvent)="onDeleteBoard()"></app-menu>
+    </div>
   </div>
 </div>

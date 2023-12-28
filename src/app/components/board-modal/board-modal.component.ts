@@ -1,9 +1,9 @@
 import { IBoard } from '../../../ts/models/board.model';
 import { IColumn } from '../../../ts/models/column.model';
 import { IBoardForm } from './ts/models/board-form.model';
-import { AddEditModal } from '../../classes/add-edit-modal';
 import { InputComponent } from '../ui/input/input.component';
 import { ButtonComponent } from '../ui/button/button.component';
+import { AddEditModal } from '../../classes/add-edit-modal.class';
 import { BoardModalService } from './services/board-modal.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
