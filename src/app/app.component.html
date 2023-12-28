@@ -1,5 +1,16 @@
+@if(showSideMenu()) {
+  @if(expandSidebar()) {
+    <app-side-menu></app-side-menu>
+  } @else {
+    <img src="assets/images/icon-show-sidebar.svg" alt="icon-show-sidebar" class="icon-show-sidebar"
+    (click)="onToggleSidebar()">
+  }
+}
+
 <div class="container">
   <app-header></app-header>
 
-  <router-outlet></router-outlet>
+  <div class="outlet" [ngClass]="{'outlet--left': !expandSidebar()}">
+    <router-outlet></router-outlet>
+  </div>
 </div>

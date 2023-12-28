@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [ngClass]="{'container--sidebar': sidebarMode}">
   @if(boards(); as boards) {
   <h1 class="heading">ALL BOARDS ({{boards.length}})</h1>
 
@@ -19,6 +19,8 @@
     </div>
   </div>
 
+  @if(!sidebarMode) {
   <app-theme-switcher></app-theme-switcher>
+  }
   }
 </div>

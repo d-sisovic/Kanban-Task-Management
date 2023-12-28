@@ -1,11 +1,11 @@
 import { ITask } from '../../../ts/models/task.model';
 import { IBoard } from '../../../ts/models/board.model';
 import { ISubtask } from '../../../ts/models/subtask.model';
-import { AddEditModal } from '../../classes/add-edit-modal';
 import { InputComponent } from '../ui/input/input.component';
 import { SelectComponent } from '../ui/select/select.component';
 import { ButtonComponent } from '../ui/button/button.component';
 import { TaskModalService } from './services/task-modal.service';
+import { AddEditModal } from '../../classes/add-edit-modal.class';
 import { ILabelValue } from '../../../ts/models/label-value.model';
 import { ITaskModalForm } from './ts/models/task-modal-form.model';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';

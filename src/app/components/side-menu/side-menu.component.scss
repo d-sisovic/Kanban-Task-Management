@@ -1,0 +1,40 @@
+@use "../../../styles/variables";
+
+:host {
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  height: 100vh;
+  display: block;
+  position: fixed;
+  top: var(--heading-height);
+  width: var(--sidebar-width);
+  background: variables.$white;
+  border-right: 0.1rem solid variables.$line-light;
+}
+
+.container {
+  height: 100%;
+  position: relative;
+  margin-top: 3.2rem;
+
+  .menu {
+    overflow-y: auto;
+    overflow-x: hidden;
+    // 11.2 - top offset, 14.4 - bottom offset
+    height: calc(100vh - 11.2rem - 14.4rem);
+  }
+
+  .footer {
+    margin-right: 1.3rem;
+    color: variables.$medium-grey;
+
+    &__hide {
+      gap: 1rem;
+      cursor: pointer;
+      margin-top: 1.4rem;
+      margin-left: 2.4rem;
+      display: inline-flex;
+    }
+  }
+}

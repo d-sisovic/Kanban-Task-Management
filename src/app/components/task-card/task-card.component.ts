@@ -1,5 +1,6 @@
-import { ITask } from '../../../ts/models/task.model';
 import { MatDialog } from '@angular/material/dialog';
+import { ITask } from '../../../ts/models/task.model';
+import { enterAnimationDuration } from './../../utils/util';
 import { ChangeDetectionStrategy, Component, Input, OnChanges, inject } from '@angular/core';
 import { TaskCardModalComponent } from './components/task-card-modal/task-card-modal.component';
 
@@ -15,7 +16,7 @@ export class TaskCardComponent implements OnChanges {
 
   @Input() task!: ITask;
 
-  public readonly dialog = inject(MatDialog);
+  private readonly dialog = inject(MatDialog);
 
   public completedAmount = 0;
 
@@ -26,6 +27,6 @@ export class TaskCardComponent implements OnChanges {
   }
 
   public onCardClick(): void {
-    this.dialog.open(TaskCardModalComponent, { data: { task: this.task, completedAmount: this.completedAmount } });
+    this.dialog.open(TaskCardModalComponent, { data: { task: this.task, completedAmount: this.completedAmount }, enterAnimationDuration });
   }
 }

@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="menu">
+    <app-mobile-menu [sidebarMode]="true"></app-mobile-menu>
+  </div>
+
+  <div class="footer">
+    <app-theme-switcher></app-theme-switcher>
+
+    <div class="footer__hide">
+      <img src="assets/images/icon-hide-sidebar.svg" alt="icon-hide-sideba">
+
+      <span class="heading--m" (click)="onToggleSidebar()">Hide Sidebar</span>
+    </div>
+  </div>
+</div>

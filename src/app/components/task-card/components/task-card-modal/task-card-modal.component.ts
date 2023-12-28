@@ -1,5 +1,6 @@
-import { MatMenuModule } from '@angular/material/menu';
 import { ITask } from '../../../../../ts/models/task.model';
+import { MenuComponent } from '../../../ui/menu/menu.component';
+import { enterAnimationDuration } from './../../../../utils/util';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { SelectComponent } from '../../../ui/select/select.component';
 import { ILabelValue } from '../../../../../ts/models/label-value.model';
@@ -15,7 +16,7 @@ import { ChangeDetectionStrategy, Component, Inject, OnInit, Signal, inject } fr
   selector: 'app-task-card-modal',
   standalone: true,
   imports: [
-    MatMenuModule,
+    MenuComponent,
     SelectComponent,
     SubtaskModalComponent,
     SubtaskCompletedCountPipe
@@ -26,7 +27,7 @@ import { ChangeDetectionStrategy, Component, Inject, OnInit, Signal, inject } fr
 })
 export class TaskCardModalComponent implements OnInit {
 
-  public readonly dialog = inject(MatDialog);
+  private readonly dialog = inject(MatDialog);
   private readonly storeTaskService = inject(StoreTaskService);
   private readonly storeBoardService = inject(StoreBoardService);
 
@@ -47,10 +48,10 @@ export class TaskCardModalComponent implements OnInit {
   }
 
   public onEditTask(): void {
-    this.dialog.open(TaskModalComponent, { data: { selectedTask: this.selectedTask() } });
+    this.dialog.open(TaskModalComponent, { data: { selectedTask: this.selectedTask() }, enterAnimationDuration });
   }
 
   public onDeleteTask(): void {
-    this.dialog.open(TaskModalDeleteComponent, { data: { selectedTask: this.selectedTask() } });
+    this.dialog.open(TaskModalDeleteComponent, { data: { selectedTask: this.selectedTask() }, enterAnimationDuration });
   }
 }

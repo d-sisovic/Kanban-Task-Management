@@ -1,11 +1,11 @@
 import { NgClass } from '@angular/common';
-import { DialogRef } from '@angular/cdk/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { IBoard } from '../../../ts/models/board.model';
+import { enterAnimationDuration } from './../../utils/util';
 import { BoardModalComponent } from '../board-modal/board-modal.component';
 import { StoreBoardService } from '../content/services/store/store-board.service';
 import { ThemeSwitcherComponent } from '../ui/theme-switcher/theme-switcher.component';
-import { ChangeDetectionStrategy, Component, OnInit, WritableSignal, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, WritableSignal, inject } from '@angular/core';
 
 @Component({
   selector: 'app-mobile-menu',
@@ -20,8 +20,9 @@ import { ChangeDetectionStrategy, Component, OnInit, WritableSignal, inject } fr
 })
 export class MobileMenuComponent implements OnInit {
 
+  @Input() sidebarMode!: boolean;
+
   public readonly dialog = inject(MatDialog);
-  private readonly dialogRef = inject(DialogRef);
   private readonly storeBoardService = inject(StoreBoardService);
 
   public boards!: WritableSignal<IBoard[] | null>;
@@ -36,10 +37,10 @@ export class MobileMenuComponent implements OnInit {
   }
 
   public onCreateNewBoard(): void {
-    this.dialog.open(BoardModalComponent, { data: { board: null } });
+    this.dialog.open(BoardModalComponent, { data: { board: null }, enterAnimationDuration });
   }
 
   private closeDialog(): void {
-    this.dialogRef.close();
+    this.dialog.closeAll();
   }
 }
