@@ -34,7 +34,7 @@ export class StoreTaskService {
   public updateTaskStatus(taskId: string, newStatus: string): void {
     this.storeBoardService.getBoards.update(previous => (previous || []).reduce((accumulator, board) => {
       const { columns } = board;
-      const isTaskInsideColumn = this.isTaskInColumn(columns, taskId);
+      const isTaskInsideColumn = this.isTaskInColumns(columns, taskId);
 
       if (!isTaskInsideColumn) { return [...accumulator, board]; }
 
@@ -82,12 +82,41 @@ export class StoreTaskService {
     return subtasks.map(title => ({ id: uuid.v4(), title, isCompleted: true }));
   }
 
-   // Removes selected task
+  // Removes selected task
   public deleteTask(taskId: string, boardId: string): void {
     this.storeBoardService.getBoards.update(previous => (previous || []).map(board => {
       if (board.id !== boardId) { return board; }
 
       return { ...board, columns: this.filterTaskInPreviousColumn(board.columns, taskId) };
+    }));
+  }
+
+  // Handle move task on drag on drop in another column
+  public transferTaskInAnotherColumn(column: IColumn, previousColumnId: string, selectedBoardId: string, currentIndex: number, previousIndex: number): void {
+    this.storeBoardService.getBoards.update(previous => (previous || []).map(board => {
+      if (board.id !== selectedBoardId) { return board; }
+
+      const matchingTask = this.findTaskInColumnForDND(board.columns, column.name, previousColumnId, previousIndex);
+
+      if (!matchingTask) { return board; }
+
+      const filteredColumns = this.filterTaskInPreviousColumn(board.columns, matchingTask.id);
+      const columns = this.reorderTaskInColumn(filteredColumns, matchingTask, column.id, currentIndex);
+
+      return { ...board, columns };
+    }));
+  }
+
+  // Handle move task on drag on drop in existing column
+  public moveTaskInExistingColumn(column: IColumn, selectedBoardId: string, currentIndex: number, previousIndex: number): void {
+    this.storeBoardService.getBoards.update(previous => (previous || []).map(board => {
+      if (board.id !== selectedBoardId) { return board; }
+
+      const matchingTask = column.tasks[previousIndex];
+      const filteredColumns = this.filterTaskInPreviousColumn(board.columns, matchingTask.id);
+      const columns = this.reorderTaskInColumn(filteredColumns, matchingTask, column.id, currentIndex);
+
+      return { ...board, columns };
     }));
   }
 
@@ -146,10 +175,24 @@ export class StoreTaskService {
     return { ...board, columns };
   }
 
+  // Reorders tasks in the column matching by columnId
+  private reorderTaskInColumn(columns: IColumn[], task: ITask, columnId: string, index: number): IColumn[] {
+    return columns.map(column => column.id !== columnId ? column : { ...column, tasks: this.reorderTask(column.tasks, task, index) });
+  }
+
+  // Adds task at specific index in the array
+  private reorderTask(tasks: ITask[], task: ITask, index: number): ITask[] {
+    const newTasks = [...tasks];
+
+    newTasks.splice(index, 0, task);
+
+    return newTasks;
+  }
+
   // Filters out task which is going to be in another column
   private filterTaskInPreviousColumn(columns: IColumn[], taskId: string): IColumn[] {
     return columns.map(column => {
-      const isTaskInsideColumn = this.isTaskInColumn(columns, taskId);
+      const isTaskInsideColumn = this.isTaskInColumn(column, taskId);
 
       if (!isTaskInsideColumn) { return column; }
 
@@ -172,7 +215,19 @@ export class StoreTaskService {
   }
 
   // Checks whether specified task is in the provided columns
-  private isTaskInColumn(columns: IColumn[], taskId: string): boolean {
+  private isTaskInColumns(columns: IColumn[], taskId: string): boolean {
     return columns.some(column => column.tasks.find(task => task.id === taskId));
+  }
+
+  // Gets matching task by index in provided columnId, and updates it's status by newely transfered column name
+  private findTaskInColumnForDND(columns: IColumn[], status: string, columnId: string, taskIndex: number): ITask | null {
+    const matchingTask = columns.find(column => column.id === columnId)?.tasks[taskIndex] || null;
+
+    return matchingTask ? { ...matchingTask, status } : null;
+  }
+
+  // Checks whether specified task is in the provided column
+  private isTaskInColumn(column: IColumn, taskId: string): boolean {
+    return column.tasks.some(task => task.id === taskId);
   }
 }

@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { IBoard } from '../../../ts/models/board.model';
+import { CdkDropListGroup } from '@angular/cdk/drag-drop';
 import { ColumnComponent } from './components/column/column.component';
 import { AddColumnComponent } from '../add-column/add-column.component';
 import { StoreBoardService } from './services/store/store-board.service';
@@ -12,6 +13,7 @@ import { ChangeDetectionStrategy, Component, OnInit, Signal, inject, signal } fr
   standalone: true,
   imports: [
     NgClass,
+    CdkDropListGroup,
     ColumnComponent,
     AddColumnComponent,
     EmptyBoardComponent

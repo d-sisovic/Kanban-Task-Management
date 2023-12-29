@@ -76,8 +76,10 @@ export class StoreBoardService {
 
   // Sets initially selected board by 0 index
   private formatInitialBoards(boards: IBoard[]): IBoard[] {
+    const selectedBoardIndex = this.getIndexOfSelectedBoard(boards);
+
     return boards.map((board, index) => {
-      const selected = index === 0;
+      const selected = index === selectedBoardIndex;
       const columns = this.setBoardDataValueIds(board);
 
       return { ...board, selected, id: uuid.v4(), columns };
@@ -98,5 +100,12 @@ export class StoreBoardService {
   // Assign to object id, based on the key provided
   private assignIdToPassedArray<T>(data: Array<T>): Array<T> {
     return data.map(item => ({ ...item, id: uuid.v4() }));
+  }
+
+  // Gets index of board which have selected property as true
+  private getIndexOfSelectedBoard(boards: IBoard[]): number {
+    const index = boards.findIndex(board => board.selected);
+
+    return index === -1 ? 0 : index;
   }
 }

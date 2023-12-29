@@ -2,7 +2,7 @@
   <img src="assets/images/icon-light-theme.svg" alt="icon-light-theme">
 
   <label class="switcher">
-    <input type="checkbox" [checked]="false" (change)="onChange()" />
+    <input type="checkbox" [checked]="checkboxState" [(ngModel)]="checkboxState" (ngModelChange)="onChange($event)" />
     <span class="switcher__circle"></span>
   </label>
 

@@ -2,7 +2,7 @@
   <div class="subcontainer">
     @if(selectedBoard(); as selectedBoard) {
 
-    <div class="column">
+    <div cdkDropListGroup class="column">
       @for(column of selectedBoard.columns; track column.id; let index = $index) {
       <app-column [column]="column" [index]="index"></app-column>
       } @empty {
@@ -10,7 +10,7 @@
       }
 
       @if(selectedBoard.columns.length) {
-        <app-add-column></app-add-column>
+      <app-add-column></app-add-column>
       }
     </div>
 
