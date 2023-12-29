@@ -33,6 +33,6 @@ export class AddEditModal {
 
   public setIsAddMode(isAddMode: boolean): void {
     this.isAddMode = isAddMode;
-    this.formChanged = this.isAddMode;
+    this.formChanged = isAddMode;
   }
 }

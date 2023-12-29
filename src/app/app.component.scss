@@ -1,4 +1,3 @@
-@use "../styles/variables";
 @use "../styles/breakpoints";
 
 .container {
@@ -6,7 +5,7 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  background: variables.$light-grey-light-bg;
+  background: var(--light-grey-light-bg);
 
   .outlet {
     height: 100%;

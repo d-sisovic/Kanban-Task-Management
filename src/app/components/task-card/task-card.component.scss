@@ -1,5 +1,3 @@
-@use "../../../styles/variables";
-
 .container {
   gap: 0.8rem;
   width: 28rem;
@@ -9,7 +7,7 @@
   border-radius: 0.8rem;
   flex-direction: column;
   padding: 2.3rem 1.6rem;
-  background: variables.$white;
+  background: var(--white-bg);
   box-shadow: 0 0.4rem 0.6rem 0 rgba(54, 78, 126, 0.10);
 
   &::after {
@@ -29,7 +27,11 @@
     opacity: 1;
   }
 
+  .heading--m {
+    color: var(--black) !important;
+  }
+
   .heading--s {
-    color: variables.$medium-grey;
+    color: var(--medium-grey);
   }
 }

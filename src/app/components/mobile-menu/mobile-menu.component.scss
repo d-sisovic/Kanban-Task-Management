@@ -1,10 +1,8 @@
-@use "../../../styles/variables";
-
 .container {
   width: 26.4rem;
   padding-top: 1.6rem;
   padding-right: 2.4rem;
-  color: variables.$medium-grey;
+  color: var(--medium-grey);
 
   &--sidebar {
     padding-top: 0;
@@ -31,14 +29,14 @@
       padding: 1.4rem 2.4rem;
 
       &--new {
-        color: variables.$main-purple;
+        color: var(--main-purple);
       }
 
       &:hover,
       &--selected {
-        color: variables.$white;
+        color: var(--white);
         border-radius: 0 10rem 10rem 0;
-        background: variables.$main-purple;
+        background: var(--main-purple);
 
         img {
           content: url("/assets/images/icon-board-white.svg");

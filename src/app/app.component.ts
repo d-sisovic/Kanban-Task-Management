@@ -44,12 +44,18 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.setInitiallySelectedTheme();
+
     this.showSideMenu = this.utilUiService.watchShowSidebar;
     this.expandSidebar = this.utilUiService.watchToggleExpandSidebar;
   }
 
   public onToggleSidebar(): void {
     this.utilUiService.toggleExpandSidebar();
+  }
+
+  private setInitiallySelectedTheme(): void {
+    this.utilUiService.setDocumentAttributeTheme(JSON.stringify(this.utilUiService.getInitiallySelectedTheme));
   }
 
   private setIfSideMenuIsVisible(innerWidth: number): void {

@@ -1,6 +1,5 @@
 @use './styles/reset';
 @use './styles/fonts';
-@use './styles/variables';
 @use './styles/breakpoints';
 @use './styles/custom-scrollbar';
 // Custom Theming for Angular Material
@@ -39,10 +38,44 @@ $kanban-task-management-theme: mat.define-light-theme((color: (primary: $kanban-
 // Angular Material override styles
 
 :root {
+  --main-purple: #635FC7;
+  --main-purple-hover: #A8A4FF;
+  --black: #000112;
+  --very-dark-grey-dark: #20212C;
+  --dark-grey: #2B2C37;
+  --line-dark: #3E3F4E;
+  --medium-grey: #828FA3;
+  --line-light: #E4EBFA;
+  --light-grey-light-bg: #F4F7FD;
+  --white: #FFFFFF;
+  --white-bg: #FFFFFF;
+  --red: #EA5555;
+  --red-hover: #FF9898;
   --heading-height: 8rem;
   --sidebar-width: 26rem;
+  --placeholder-color: #BFBFC4;
+  --secondary-button: #EFEFF9;
+  --secondary-button-hover: #D8D7F1;
   --mdc-dialog-container-shape: 0.6rem;
   --mdc-filled-text-field-container-color: transparent;
+  --mat-select-panel-background-color: #FFFFFF;
+  --mat-menu-container-color: #FFFFFF;
+  --input-label: #828FA3;
+  --logo: url("/assets/images/logo-dark.svg");
+  --new-column-bg: linear-gradient(180deg, #E9EFFA 0%, rgba(233, 239, 250, 0.50) 100%);
+}
+
+[data-theme="true"] {
+  --black: #FFFFFF;
+  --white-bg: #2B2C37;
+  --line-light: #3E3F4E;
+  --light-grey-light-bg: #20212C;
+  --secondary-button: #FFFFFF;
+  --input-label: #FFFFFF;
+  --mat-select-panel-background-color: #2B2C37;
+  --mat-menu-container-color: #2B2C37;
+  --logo: url("/assets/images/logo-light.svg");
+  --new-column-bg: linear-gradient(180deg, rgba(43, 44, 55, 0.25) 0%, rgba(43, 44, 55, 0.13) 100%);
 }
 
 mat-form-field {
@@ -51,7 +84,7 @@ mat-form-field {
   outline: 0.1rem solid rgba(130, 143, 163, 0.25);
 
   &.mat-focused {
-    outline: 0.1rem solid variables.$main-purple;
+    outline: 0.1rem solid var(--main-purple);
   }
 }
 
@@ -66,7 +99,7 @@ mat-form-field {
 .mat-mdc-select-min-line {
   font-weight: 500;
   font-size: 1.3rem;
-  color: variables.$black;
+  color: var(--black);
   font-family: "PlusJakartaSans-Regular";
 }
 
@@ -102,6 +135,14 @@ mat-form-field {
   min-height: 0 !important;
 }
 
+.mdc-dialog__surface {
+  background: var(--white-bg) !important;
+}
+
+.mdc-list-item__primary-text {
+  color: var(--black);
+}
+
 // Custom classes
 
 .modal {
@@ -112,14 +153,14 @@ mat-form-field {
 }
 
 .menu__item--red {
-  color: variables.$red;
+  color: var(--red);
 }
 
 .input__label {
   @extend .text--bold;
   display: inline-block;
   margin-bottom: 0.8rem;
-  color: variables.$medium-grey;
+  color: var(--input-label);
 }
 
 .heading--xl {
@@ -130,6 +171,7 @@ mat-form-field {
 
 .heading--l {
   font-size: 1.8rem;
+  color: var(--black);
   line-height: 2.3rem;
   font-family: "PlusJakartaSans-Bold";
 }
