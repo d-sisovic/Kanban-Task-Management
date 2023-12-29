@@ -1,18 +1,17 @@
-@use "../../../../../styles/variables";
-
 .container {
   display: flex;
   align-items: center;
   border-radius: 0.4rem;
-  background: variables.$light-grey-light-bg;
+  background: var(--light-grey-light-bg);
 
   &:hover {
-    background: rgba(variables.$main-purple, 0.25);
+    background: rgba(#635FC7, 0.25);
   }
 
   .label {
     width: 100%;
     cursor: pointer;
+    color: var(--black);
     padding: 1.3rem 0.8rem 1.6rem 0;
   }
 

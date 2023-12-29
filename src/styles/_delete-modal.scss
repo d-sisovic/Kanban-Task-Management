@@ -1,13 +1,12 @@
-@use "./variables";
 @use "./breakpoints";
 
 .modal {
   .heading--l {
-    color: variables.$red;
+    color: var(--red);
   }
 
   .text {
-    color: variables.$medium-grey;
+    color: var(--medium-grey);
   }
 
   .footer {

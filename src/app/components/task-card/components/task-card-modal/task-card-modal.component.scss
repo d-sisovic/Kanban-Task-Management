@@ -1,5 +1,3 @@
-@use "../../../../../styles/variables";
-
 .modal {
   .header {
     gap: 1.6rem;
@@ -10,11 +8,11 @@
 
   .text {
     font-weight: 500;
-    color: variables.$medium-grey;
+    color: var(--medium-grey);
   }
 
   .text--bold {
-    color: variables.$medium-grey;
+    color: var(--medium-grey);
   }
 
   .subtask {

@@ -1,5 +1,3 @@
-@use "../../../../../styles/variables";
-
 .container {
   gap: 2.5rem;
   height: 100%;
@@ -10,6 +8,6 @@
 
   p {
     text-align: center;
-    color: variables.$medium-grey;
+    color: var(--medium-grey);
   }
 }

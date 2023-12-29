@@ -1,38 +1,46 @@
-@use "../../../../styles/variables";
-
 :host {
   width: 100%;
 }
 
+::placeholder {
+  color: var(--placeholder-color) !important;
+  opacity: 1 !important;
+  /* Firefox */
+}
+
+::-ms-input-placeholder {
+  /* Edge 12 -18 */
+  color: var(--placeholder-color) !important;
+}
+
 .container {
-    position: relative;
+  position: relative;
 
-    input,
-    textarea {
-      font-weight: 500;
-      font-size: 1.3rem;
-      color: variables.$black;
-      font-family: "PlusJakartaSans-Regular";
-    }
+  input,
+  textarea {
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: var(--black);
+    font-family: "PlusJakartaSans-Regular";
+  }
 
-    textarea {
-      min-height: 11.2rem;
-    }
+  textarea {
+    min-height: 11.2rem;
+  }
 
-    .input--error {
-      outline: 0.1rem solid variables.$red;
-    }
+  .input--error {
+    outline: 0.1rem solid var(--red);
+  }
 
-    .input--shorten {
-      padding-right: 11rem;
-    }
+  .input--shorten {
+    padding-right: 11rem;
+  }
 
-    .error {
-      top: 50%;
-      right: 0;
-      position: absolute;
-      color: variables.$red;
-      transform: translateY(-50%);
-      background-color: variables.$white;
-    }
+  .error {
+    top: 50%;
+    right: 0;
+    color: var(--red);
+    position: absolute;
+    transform: translateY(-50%);
+  }
 }

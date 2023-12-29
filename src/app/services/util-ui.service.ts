@@ -1,5 +1,6 @@
+import { DOCUMENT } from '@angular/common';
 import { LocalStorage } from '../ts/enums/local-storage.enum';
-import { Injectable, WritableSignal, effect, signal } from '@angular/core';
+import { Inject, Injectable, WritableSignal, effect, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class UtilUiService {
   private expandSidebar: WritableSignal<boolean> = signal(this.getInitialExpandSidebarValue);
   private showSidebarState: WritableSignal<boolean> = signal(this.shouldShowSidebarMenu(window.innerWidth));
 
-  constructor() {
+  constructor(@Inject(DOCUMENT) private readonly document: Document) {
     effect(() => {
       const expandSidebar = this.expandSidebar();
 
@@ -41,11 +42,21 @@ export class UtilUiService {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
   }
 
-  private get getInitialExpandSidebarValue(): boolean {
-    const expandSidebarSaved = localStorage.getItem(LocalStorage.FRONTEND_MENTOR_EXPAND_SIDEBAR);
+  public setDocumentAttributeTheme(checked: string): void {
+    this.document.querySelector('body')?.setAttribute('data-theme', checked);
+  }
 
+  public get getInitiallySelectedTheme(): boolean {
     try {
-      return JSON.parse(expandSidebarSaved || 'true');
+      return JSON.parse(localStorage.getItem(LocalStorage.FRONTEND_MENTOR_THEME) || 'false');
+    } catch {
+      return false;
+    }
+  }
+
+  private get getInitialExpandSidebarValue(): boolean {
+    try {
+      return JSON.parse(localStorage.getItem(LocalStorage.FRONTEND_MENTOR_EXPAND_SIDEBAR) || 'true');
     } catch {
       return true;
     }

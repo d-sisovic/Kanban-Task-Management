@@ -1,5 +1,3 @@
-@use "../../../../styles/variables";
-
 .container {
   gap: 2.3rem;
   display: flex;
@@ -8,7 +6,7 @@
   border-radius: 0.6rem;
   justify-content: center;
   margin: 0 0 1.6rem 1.3rem;
-  background: variables.$light-grey-light-bg;
+  background: var(--light-grey-light-bg);
 
   img {
     width: 1.6rem;
@@ -39,7 +37,7 @@
       cursor: pointer;
       position: absolute;
       border-radius: 99.9rem;
-      background-color: variables.$main-purple;
+      background-color: var(--main-purple);
 
       &::before {
         content: "";
@@ -48,8 +46,8 @@
         height: 1.4rem;
         position: absolute;
         border-radius: 50%;
+        background-color: var(--white);
         transition: transform 0.5s ease;
-        background-color: variables.$white;
       }
     }
   }
