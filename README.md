@@ -35,8 +35,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: []
-- Live Site URL: []
+- Solution URL: [https://www.frontendmentor.io/solutions/kanban-task-management-angular-v17-with-signals-angular-material-duwa5vpm1_]
+- Live Site URL: [https://d-sisovic.github.io/Kanban-Task-Management/]
 
 ## My process
 
