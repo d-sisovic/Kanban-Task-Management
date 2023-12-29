@@ -1,6 +1,9 @@
+@use "./variables";
+
 /* width */
 ::-webkit-scrollbar {
   width: 1rem;
+  height: 1rem;
 }
 
 /* Track */
@@ -10,10 +13,10 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: variables.$main-purple;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: variables.$main-purple-hover;
 }
