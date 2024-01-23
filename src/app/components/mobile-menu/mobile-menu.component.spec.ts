@@ -1,12 +1,12 @@
 import { MobileMenuComponent } from './mobile-menu.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 describe('MobileMenuComponent', () => {
   let component: MobileMenuComponent;
   let fixture: ComponentFixture<MobileMenuComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync (() => {
+    TestBed.configureTestingModule({
       imports: [MobileMenuComponent]
     })
     .compileComponents();
@@ -14,7 +14,7 @@ describe('MobileMenuComponent', () => {
     fixture = TestBed.createComponent(MobileMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -1,23 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SubtaskModalComponent } from './subtask-modal.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 describe('SubtaskModalComponent', () => {
   let component: SubtaskModalComponent;
   let fixture: ComponentFixture<SubtaskModalComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync (() => {
+   TestBed.configureTestingModule({
       imports: [SubtaskModalComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(SubtaskModalComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
+    component.subtask = {
+      id: "1",
+      title: "Subtask test",
+      isCompleted: true
+    };
+
+    fixture.detectChanges();
+
     expect(component).toBeTruthy();
   });
 });
