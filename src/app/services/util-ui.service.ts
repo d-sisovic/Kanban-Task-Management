@@ -62,7 +62,7 @@ export class UtilUiService {
     }
   }
 
-  private shouldShowSidebarMenu(windowWidth: number): boolean {
+  public shouldShowSidebarMenu(windowWidth: number): boolean {
     return windowWidth >= 768;
   }
 }
